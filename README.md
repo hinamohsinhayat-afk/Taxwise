@@ -24,6 +24,35 @@
   <img src="https://img.shields.io/badge/DOMAIN-CANADIAN%20TAX%20SOFTWARE-f97316?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=07111f" />
 </p>
 
+<br/>
+
+<!-- Live Demo Button -->
+<a href="https://taxwise-blush.vercel.app/" target="_blank">
+  <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-CLICK%20TO%20LAUNCH%20APP-FF4B4B?style=for-the-badge&logo=vercel&logoColor=white&labelColor=07111f" />
+</a>
+
+</div>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
+
+## `> LIVE.PREVIEW — TRY IT NOW`
+
+<div align="center">
+
+<a href="https://taxwise-blush.vercel.app/" target="_blank">
+  <img src="https://img.shields.io/badge/%E2%9A%A1%20VERCEL%20APP-taxwise--blush.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white&labelColor=07111f" />
+</a>
+
+<br/><br/>
+
+> 🧾 **Get instant Canadian tax software recommendations — No installation required. Just answer 6 questions and let AI guide you.**
+
+| `ACTION` | `LINK` |
+| :------: | :----- |
+| 🌐 Open Live App | [taxwise-blush.vercel.app](https://taxwise-blush.vercel.app/) |
+| 🧭 Start Wizard | Answer 6 steps to get your recommendation |
+| 🤖 Ask AI Assistant | Chat with the Groq-powered tax assistant |
+
 </div>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
@@ -31,8 +60,7 @@
 ## `> IMAGE.PREVIEW — SCREENSHOTS`
 
 <!-- Upload your screenshots to this repo and replace the URLs below -->
-<img width="952" height="401" alt="image" src="https://github.com/user-attachments/assets/a3b3247e-ed51-4f66-a30e-32b3df735223" />
-
+![TaxWise AI Preview](https://github.com/user-attachments/assets/your-image-id-here)
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
 
