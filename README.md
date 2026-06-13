@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- Animated Banner -->
-<img src="https://capsule-render.vercel.app/api?type=shark&color=0:07111f,50:0f4c75,100:07111f&height=200&section=header&text=TAXWISE%20AI&fontSize=72&fontColor=ffffff&animation=fadeIn&fontAlignY=45&desc=AI-Powered%20Tax%20Software%20Recommendation%20Engine&descAlignY=68&descSize=20&descColor=93c5fd" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=shark&color=0:07111f,50:0f4c75,100:07111f&height=200&section=header&text=TAXWISE%20AI&fontSize=72&fontColor=ffffff&animation=twinkling&fontAlignY=45&desc=AI-Powered%20Tax%20Software%20Recommendation%20Engine&descAlignY=68&descSize=20&descColor=93c5fd" width="100%"/>
 
 <!-- Typing Animation -->
 <a href="https://git.io/typing-svg">
@@ -25,6 +25,14 @@
 </p>
 
 </div>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
+
+## `> IMAGE.PREVIEW — SCREENSHOTS`
+
+<!-- Upload your screenshots to this repo and replace the URLs below -->
+<img width="952" height="401" alt="image" src="https://github.com/user-attachments/assets/a3b3247e-ed51-4f66-a30e-32b3df735223" />
+
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
 
@@ -335,7 +343,7 @@ This project uses AI-assisted development for implementation support and uses Gr
 <div align="center">
 
 <!-- Footer Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:07111f,40:0d2137,70:0f4c75,100:07111f&height=200&section=footer&text=TAXWISE%20AI&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=45&desc=Next.js%2014%20%E2%80%A2%20Groq%20LLaMA%203.3%20%E2%80%A2%20TypeScript%20%E2%80%A2%20Vitest&descAlignY=68&descSize=16&descColor=93c5fd" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:07111f,40:0d2137,70:0f4c75,100:07111f&height=200&section=footer&text=HINA%20MOHSIN&fontSize=52&fontColor=ffffff&animation=twinkling&fontAlignY=45&desc=Next.js%2014%20%E2%80%A2%20Groq%20LLaMA%203.3%20%E2%80%A2%20TypeScript%20%E2%80%A2%20Vitest&descAlignY=68&descSize=16&descColor=93c5fd" width="100%"/>
 
 <br/>
 
