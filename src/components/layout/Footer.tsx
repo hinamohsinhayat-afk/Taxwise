@@ -17,6 +17,7 @@ export default function Footer() {
                 height={32}
                 sizes="128px"
                 className="h-8 w-auto"
+                style={{ width: 'auto', height: 'auto' }}
               />
             </Link>
             <p className="max-w-xs text-[14px] text-[var(--text-secondary)] leading-relaxed">
