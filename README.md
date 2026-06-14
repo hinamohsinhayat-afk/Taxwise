@@ -60,7 +60,8 @@
 ## `> IMAGE.PREVIEW — SCREENSHOTS`
 
 <!-- Upload your screenshots to this repo and replace the URLs below -->
-![TaxWise AI Preview](https://github.com/user-attachments/assets/your-image-id-here)
+<img width="764" height="410" alt="image" src="https://github.com/user-attachments/assets/38b93ba6-8300-4239-9e29-b8b1d0e67cfe" />
+
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/fire.png" width="100%"/>
 
