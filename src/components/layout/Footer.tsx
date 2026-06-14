@@ -13,9 +13,9 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="TaxWise"
-                width={0}
-                height={0}
-                sizes="100vw"
+                width={128}
+                height={32}
+                sizes="128px"
                 className="h-8 w-auto"
               />
             </Link>

@@ -23,14 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
-      <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/logo.png"
-          fetchPriority="high"
-        />
-      </head>
       <body className="antialiased min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           <Navbar />
