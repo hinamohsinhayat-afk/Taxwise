@@ -272,9 +272,9 @@ export default function LandingPage() {
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.08, y: -6 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    className={`relative bg-[var(--surface)] border rounded-[16px] p-7 cursor-pointer transition-colors duration-300 hover:border-[var(--border-hover)] ${
+                    whileHover={{ scale: 1.08, y: -8 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.05 }}
+                    className={`relative bg-[var(--surface)] border rounded-[16px] p-7 cursor-pointer transition-shadow duration-300 hover:border-[var(--border-hover)] hover:shadow-[0_0_30px_rgba(59,130,246,0.35),0_0_60px_rgba(34,211,238,0.15)] ${
                       isMostPopular
                         ? "border-[var(--primary)] shadow-[0_0_40px_rgba(59,130,246,0.2)]"
                         : "border-[var(--border)]"
