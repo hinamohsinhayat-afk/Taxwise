@@ -100,7 +100,7 @@ export default function LandingPage() {
   return (
     <div className="relative overflow-hidden bg-[var(--background)] min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 py-32">
+      <section className="relative min-h-screen flex items-center justify-center px-6 pt-16 pb-32">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-radial-gradient pointer-events-none" />
         

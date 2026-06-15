@@ -295,7 +295,7 @@ function RecommendPageContent() {
   );
 
   return (
-    <div className="min-h-screen bg-[var(--background)] py-16 md:py-24 px-6">
+    <div className="min-h-screen bg-[var(--background)] pt-8 pb-16 md:pt-10 md:pb-24 px-6">
       <div className="mx-auto max-w-[640px]">
         {/* Wizard Card */}
         <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[24px] p-8 md:p-10">
