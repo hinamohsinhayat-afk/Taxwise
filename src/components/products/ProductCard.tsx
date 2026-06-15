@@ -109,7 +109,7 @@ export default function ProductCard({ product, highlighted = false }: ProductCar
 
       {/* CTA Button */}
       <div className="mt-6 pt-5 border-t border-[var(--border)]">
-        <Link href="/recommend" className="block">
+        <Link href={`/products/${product.id}`} className="block">
           <Button variant="ghost" className="w-full">
             Learn More
           </Button>

@@ -263,16 +263,23 @@ export default function LandingPage() {
             {previewProducts.map((product, index) => {
               const isMostPopular = product.id === "self-employed";
               return (
-                <motion.div
+                <Link
                   key={product.id}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className={`relative bg-[var(--surface)] border rounded-[16px] p-7 transition-all duration-200 hover:border-[var(--border-hover)] hover:-translate-y-0.5 ${
-                    isMostPopular ? "border-[var(--primary)] shadow-[0_0_40px_rgba(59,130,246,0.2)]" : "border-[var(--border)]"
-                  }`}
+                  href={`/products/${product.id}`}
+                  className="block group"
                 >
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.08, y: -6 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className={`relative bg-[var(--surface)] border rounded-[16px] p-7 cursor-pointer transition-colors duration-300 hover:border-[var(--border-hover)] ${
+                      isMostPopular
+                        ? "border-[var(--primary)] shadow-[0_0_40px_rgba(59,130,246,0.2)]"
+                        : "border-[var(--border)]"
+                    }`}
+                  >
                   {/* Most Popular badge */}
                   {isMostPopular && (
                     <div className="absolute -top-3 left-6 px-3 py-1 bg-[var(--primary)] text-white text-[11px] font-medium tracking-[0.08em] uppercase rounded-[6px]">
@@ -309,7 +316,8 @@ export default function LandingPage() {
                         </span>
                       ))}
                   </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               );
             })}
           </div>
