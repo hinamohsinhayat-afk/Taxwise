@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { FooterVisibility } from "@/components/layout/FooterVisibility";
+import Loading from "./loading";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +29,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           <Navbar />
           <main className="flex-grow">
-            {children}
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
           </main>
           <FooterVisibility />
         </ThemeProvider>

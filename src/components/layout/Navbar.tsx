@@ -54,6 +54,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={true}
                 className={`relative px-4 py-2 text-[14px] font-medium rounded-[8px] transition-colors flex items-center gap-1.5 ${
                   active
                     ? "text-[var(--text-primary)] bg-[rgba(255,255,255,0.05)]"
@@ -105,6 +106,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    prefetch={true}
                     className={`flex items-center rounded-[10px] px-4 py-3 text-[15px] font-medium transition-colors ${
                       active
                         ? "bg-[rgba(37,99,235,0.1)] text-[var(--primary)] border border-[rgba(37,99,235,0.2)]"

@@ -15,6 +15,7 @@ import {
   Check,
 } from "lucide-react";
 import { WizardAnswers, RecommendationResult as ResultType } from "@/lib/types";
+import { products } from "@/lib/products";
 import Button from "@/components/ui/button";
 import WizardProgress from "@/components/wizard/WizardProgress";
 import WizardStep from "@/components/wizard/WizardStep";
@@ -24,6 +25,7 @@ function RecommendPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const upgradeParam = searchParams.get("upgrade");
+  const planParam = searchParams.get("plan");
 
   const [currentStep, setCurrentStep] = useState(1);
   const [answers, setAnswers] = useState<WizardAnswers>({
@@ -36,6 +38,56 @@ function RecommendPageContent() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<ResultType | null>(null);
+  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);
+
+  // Map product ID to pre-filled wizard answers
+  const getAnswersFromPlan = (planId: string): WizardAnswers => {
+    const product = products.find((p) => p.id === planId);
+    if (!product) return { filingType: "personal", incomeSources: [], deductions: [], helpPreference: "self", hasRevenue: undefined };
+
+    const s = product.supports;
+    let filingType: WizardAnswers["filingType"] = "personal";
+    if (s.corporateFiling || s.nilCorporateReturn) filingType = "incorporated";
+    else if (s.freelanceIncome || s.gigWorkIncome || s.businessExpenses) filingType = "self-employed";
+
+    const incomeSources: string[] = [];
+    if (s.salaryIncome) incomeSources.push("salary");
+    if (s.studentIncome) incomeSources.push("student");
+    if (s.investmentIncome) incomeSources.push("investment");
+    if (s.capitalGains) incomeSources.push("capital_gains");
+    if (s.rentalIncome) incomeSources.push("rental");
+    if (s.foreignIncome) incomeSources.push("foreign");
+    if (s.freelanceIncome) incomeSources.push("freelance");
+    if (s.gigWorkIncome) incomeSources.push("gig");
+
+    const deductions: string[] = [];
+    if (s.medicalExpenses) deductions.push("medical");
+    if (s.donations) deductions.push("donations");
+    if (s.employmentExpenses) deductions.push("employment");
+    if (s.businessExpenses) deductions.push("business");
+    if (s.homeOfficeExpenses) deductions.push("home_office");
+    if (s.vehicleExpenses) deductions.push("vehicle");
+    if (deductions.length === 0) deductions.push("none");
+
+    let helpPreference: WizardAnswers["helpPreference"] = "self";
+    if (s.fullService) helpPreference = "expert-file";
+    else if (s.expertHelp) helpPreference = "expert-help";
+
+    const hasRevenue = s.nilCorporateReturn ? false : s.corporateFiling ? true : undefined;
+
+    return { filingType, incomeSources, deductions, helpPreference, hasRevenue };
+  };
+
+  useEffect(() => {
+    if (planParam) {
+      const prefill = getAnswersFromPlan(planParam);
+      setAnswers(prefill);
+      const product = products.find((p) => p.id === planParam);
+      setSelectedPlanName(product?.name ?? null);
+      submitAnswers(prefill);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [planParam]);
 
   useEffect(() => {
     if (upgradeParam) {
@@ -43,7 +95,6 @@ function RecommendPageContent() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [upgradeParam]);
-
   const isIncorporated = answers.filingType === "incorporated";
   
   const stepNames = isIncorporated
@@ -159,6 +210,7 @@ function RecommendPageContent() {
       hasRevenue: undefined,
     });
     setResult(null);
+    setSelectedPlanName(null);
     setCurrentStep(1);
     router.replace("/recommend");
   };
@@ -287,6 +339,7 @@ function RecommendPageContent() {
                   result={result}
                   onRestart={restartQuiz}
                   onUpgrade={handleUpgrade}
+                  selectedPlanName={selectedPlanName}
                 />
               </motion.div>
             ) : (

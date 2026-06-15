@@ -2,13 +2,15 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { DollarSign, Target, FileText, Tag } from "lucide-react";
+import { DollarSign, Target, FileText, Tag, Pencil, Trash2 } from "lucide-react";
 import { Product } from "@/lib/types";
 import { ValidationResult, getSupportedFeatures, getUnsupportedFeatures } from "@/lib/product-validation";
 import { FeatureBadge, ValidationBadge } from "./admin-ui";
 
-export default function ProductConfigCard({ product, validation, index }: {
+export default function ProductConfigCard({ product, validation, index, onEdit, onDelete }: {
   product: Product; validation: ValidationResult; index: number;
+  onEdit?: (product: Product) => void;
+  onDelete?: (product: Product) => void;
 }) {
   const supported = getSupportedFeatures(product);
   const unsupported = getUnsupportedFeatures(product);
@@ -32,10 +34,32 @@ export default function ProductConfigCard({ product, validation, index }: {
           </div>
         </div>
 
-        <div className="flex items-baseline gap-1.5 shrink-0">
-          <DollarSign className="h-4 w-4 text-[var(--primary)]" />
-          <span className="text-[24px] font-bold text-[var(--primary)] leading-none">{product.price}</span>
-          <span className="text-[12px] text-[var(--text-muted)]">CAD</span>
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-baseline gap-1.5">
+            <DollarSign className="h-4 w-4 text-[var(--primary)]" />
+            <span className="text-[24px] font-bold text-[var(--primary)] leading-none">{product.price}</span>
+            <span className="text-[12px] text-[var(--text-muted)]">CAD</span>
+          </div>
+          <div className="flex items-center gap-1 ml-2 pl-2 border-l border-[var(--border)]">
+            {onEdit && (
+              <button
+                onClick={() => onEdit(product)}
+                className="flex h-8 w-8 items-center justify-center rounded-[8px] text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[rgba(59,130,246,0.1)] transition-colors"
+                title="Edit product"
+              >
+                <Pencil className="h-3.5 w-3.5" />
+              </button>
+            )}
+            {onDelete && (
+              <button
+                onClick={() => onDelete(product)}
+                className="flex h-8 w-8 items-center justify-center rounded-[8px] text-[var(--text-muted)] hover:text-[var(--error)] hover:bg-[rgba(248,113,113,0.1)] transition-colors"
+                title="Delete product"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

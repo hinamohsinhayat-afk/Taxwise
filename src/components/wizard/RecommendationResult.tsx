@@ -13,9 +13,10 @@ interface RecommendationResultProps {
   result: ResultType;
   onRestart: () => void;
   onUpgrade?: (productId: string) => void;
+  selectedPlanName?: string | null;
 }
 
-export default function RecommendationResult({ result, onRestart, onUpgrade }: RecommendationResultProps) {
+export default function RecommendationResult({ result, onRestart, onUpgrade, selectedPlanName }: RecommendationResultProps) {
   useEffect(() => {
     if (result.recommendedProductId) {
       localStorage.setItem("taxwise_recommended_id", result.recommendedProductId);
@@ -26,6 +27,15 @@ export default function RecommendationResult({ result, onRestart, onUpgrade }: R
 
   return (
     <div className="space-y-8">
+      {/* Selected plan context banner */}
+      {selectedPlanName && (
+        <div className="px-4 py-3 rounded-[10px] border border-[rgba(34,211,238,0.3)] bg-[rgba(34,211,238,0.08)]">
+          <p className="text-[13px] text-[var(--text-secondary)]">
+            Based on your interest in <span className="font-semibold text-[var(--accent)]">{selectedPlanName}</span>, here&apos;s our recommendation after analyzing your profile:
+          </p>
+        </div>
+      )}
+
       {/* Header */}
       <div className="space-y-3">
         <h2 className="text-[32px] font-semibold tracking-tight text-[var(--text-primary)]">

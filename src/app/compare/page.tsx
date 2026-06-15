@@ -6,7 +6,7 @@ import ComparisonTable from "@/components/compare/ComparisonTable";
 
 export default function ComparePage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] py-16 md:py-24 px-6 lg:px-8">
+    <div className="min-h-screen bg-[var(--background)] pt-6 pb-16 md:pt-8 md:pb-24 px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <motion.div

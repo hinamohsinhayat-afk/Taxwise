@@ -163,9 +163,9 @@ export default function ProductDetailPage() {
 
           {/* CTA */}
           <div className="mt-10 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row gap-3">
-            <Link href="/recommend" className="flex-1">
+            <Link href={`/recommend?plan=${product.id}`} className="flex-1">
               <Button className="w-full gap-2 group">
-                <span>Get Started with {product.name}</span>
+                <span>Start with {product.name}</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
             </Link>

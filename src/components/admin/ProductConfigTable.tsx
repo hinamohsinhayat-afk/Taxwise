@@ -1,21 +1,24 @@
 "use client";
 
 import React from "react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Product } from "@/lib/types";
 import { ValidationResult, getSupportedFeatures, getUnsupportedFeatures } from "@/lib/product-validation";
 import { ValidationBadge } from "./admin-ui";
 
-export default function ProductConfigTable({ products, validations }: {
+export default function ProductConfigTable({ products, validations, onEdit, onDelete }: {
   products: Product[]; validations: ValidationResult[];
+  onEdit?: (product: Product) => void;
+  onDelete?: (product: Product) => void;
 }) {
   if (!products.length) return null;
 
   return (
     <div className="w-full overflow-x-auto rounded-[16px] border border-[var(--border)] bg-[var(--surface)]">
-      <table className="w-full min-w-[900px] border-collapse text-left">
+      <table className="w-full min-w-[1000px] border-collapse text-left">
         <thead className="border-b border-[var(--border)]">
           <tr>
-            {["Product ID", "Product Name", "Price", "Best For", "Supported", "Unsupported", "Validation"].map((h) => (
+            {["Product ID", "Product Name", "Price", "Best For", "Supported", "Unsupported", "Validation", "Actions"].map((h) => (
               <th key={h} className="p-4 text-[11px] font-medium text-[var(--text-muted)] uppercase tracking-[0.08em]">{h}</th>
             ))}
           </tr>
@@ -64,6 +67,28 @@ export default function ProductConfigTable({ products, validations }: {
                 </td>
                 <td className="p-4">
                   <ValidationBadge valid={v.valid} errors={v.errors} />
+                </td>
+                <td className="p-4">
+                  <div className="flex items-center gap-1.5">
+                    {onEdit && (
+                      <button
+                        onClick={() => onEdit(product)}
+                        className="flex h-8 w-8 items-center justify-center rounded-[8px] text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[rgba(59,130,246,0.1)] transition-colors"
+                        title="Edit product"
+                      >
+                        <Pencil className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                    {onDelete && (
+                      <button
+                        onClick={() => onDelete(product)}
+                        className="flex h-8 w-8 items-center justify-center rounded-[8px] text-[var(--text-muted)] hover:text-[var(--error)] hover:bg-[rgba(248,113,113,0.1)] transition-colors"
+                        title="Delete product"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             );

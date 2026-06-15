@@ -1,24 +1,32 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion } from "framer-motion";
-import { Download, Table as TableIcon, LayoutGrid, PackageOpen } from "lucide-react";
-import { products } from "@/lib/products";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Table as TableIcon, LayoutGrid, PackageOpen, Plus, RotateCcw } from "lucide-react";
+import { useProducts } from "@/lib/useProducts";
 import { validateAllProducts, getProductStats, getSupportedFeatures, exportProductsAsJson } from "@/lib/product-validation";
+import { Product } from "@/lib/types";
 import Button from "@/components/ui/button";
 import { StatsCards, SearchBar, FilterBar } from "@/components/admin/admin-ui";
 import type { FilterOption } from "@/components/admin/admin-ui";
 import ProductConfigTable from "@/components/admin/ProductConfigTable";
 import ProductConfigCard from "@/components/admin/ProductConfigCard";
+import ProductFormModal from "@/components/admin/ProductFormModal";
 import AdminAuthGuard from "@/components/admin/AdminAuthGuard";
 
 export default function AdminPage() {
+  const { products, addProduct, updateProduct, deleteProduct, resetToDefaults } = useProducts();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<FilterOption>("all");
   const [view, setView] = useState<"table" | "card">("table");
 
-  const validations = useMemo(() => validateAllProducts(products), []);
-  const stats = useMemo(() => getProductStats(products), []);
+  // Modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<Product | null>(null);
+
+  const validations = useMemo(() => validateAllProducts(products), [products]);
+  const stats = useMemo(() => getProductStats(products), [products]);
 
   const filtered = useMemo(() => {
     let result = products;
@@ -45,14 +53,39 @@ export default function AdminPage() {
     }
 
     return result;
-  }, [search, filter]);
+  }, [products, search, filter]);
 
   const filteredValidations = useMemo(() => {
     return filtered.map((p) => {
       const idx = products.findIndex((orig) => orig.id === p.id);
       return validations[idx];
     });
-  }, [filtered, validations]);
+  }, [filtered, products, validations]);
+
+  const handleAdd = () => {
+    setEditingProduct(null);
+    setModalOpen(true);
+  };
+
+  const handleEdit = (product: Product) => {
+    setEditingProduct(product);
+    setModalOpen(true);
+  };
+
+  const handleSave = (product: Product) => {
+    if (editingProduct) {
+      updateProduct(editingProduct.id, product);
+    } else {
+      addProduct(product);
+    }
+  };
+
+  const handleDeleteConfirm = () => {
+    if (deleteConfirm) {
+      deleteProduct(deleteConfirm.id);
+      setDeleteConfirm(null);
+    }
+  };
 
   return (
     <AdminAuthGuard>
@@ -74,10 +107,20 @@ export default function AdminPage() {
             <p className="mt-1 text-[13px] text-[var(--text-muted)]">{products.length} total products in system</p>
           </div>
 
-          <Button onClick={() => exportProductsAsJson(products)} size="sm" className="gap-2 shrink-0">
-            <Download className="h-4 w-4" />
-            <span>Export Product Config</span>
-          </Button>
+          <div className="flex gap-2 shrink-0">
+            <Button variant="ghost" size="sm" onClick={resetToDefaults} className="gap-2">
+              <RotateCcw className="h-4 w-4" />
+              <span>Reset</span>
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => exportProductsAsJson(products)} className="gap-2">
+              <Download className="h-4 w-4" />
+              <span>Export</span>
+            </Button>
+            <Button size="sm" onClick={handleAdd} className="gap-2">
+              <Plus className="h-4 w-4" />
+              <span>Add Product</span>
+            </Button>
+          </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
@@ -126,12 +169,12 @@ export default function AdminPage() {
 
         {filtered.length > 0 ? (
           view === "table" ? (
-            <ProductConfigTable products={filtered} validations={filteredValidations} />
+            <ProductConfigTable products={filtered} validations={filteredValidations} onEdit={handleEdit} onDelete={setDeleteConfirm} />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filtered.map((product, i) => {
                 const idx = products.findIndex((p) => p.id === product.id);
-                return <ProductConfigCard key={product.id} product={product} validation={validations[idx]} index={i} />;
+                return <ProductConfigCard key={product.id} product={product} validation={validations[idx]} index={i} onEdit={handleEdit} onDelete={setDeleteConfirm} />;
               })}
             </div>
           )
@@ -152,11 +195,53 @@ export default function AdminPage() {
             <div className="flex gap-3 mt-5">
               {search && <Button variant="ghost" size="sm" onClick={() => setSearch("")}>Clear Search</Button>}
               {filter !== "all" && <Button variant="ghost" size="sm" onClick={() => setFilter("all")}>Reset Filters</Button>}
+              <Button size="sm" onClick={handleAdd} className="gap-2">
+                <Plus className="h-4 w-4" />
+                <span>Add Product</span>
+              </Button>
             </div>
           </motion.div>
         )}
       </div>
     </div>
+
+    {/* Add / Edit Modal */}
+    <ProductFormModal
+      isOpen={modalOpen}
+      onClose={() => setModalOpen(false)}
+      onSave={handleSave}
+      product={editingProduct}
+    />
+
+    {/* Delete Confirmation Modal */}
+    <AnimatePresence>
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setDeleteConfirm(null)}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="relative bg-[var(--surface)] border border-[var(--border)] rounded-[16px] p-8 max-w-md w-full z-10"
+          >
+            <h3 className="text-[20px] font-semibold text-[var(--text-primary)] mb-2">Delete Product</h3>
+            <p className="text-[14px] text-[var(--text-secondary)] mb-6">
+              Are you sure you want to delete <span className="font-semibold text-[var(--text-primary)]">{deleteConfirm.name}</span>? This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-3">
+              <Button variant="ghost" size="sm" onClick={() => setDeleteConfirm(null)}>Cancel</Button>
+              <Button variant="destructive" size="sm" onClick={handleDeleteConfirm}>Delete Product</Button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
     </AdminAuthGuard>
   );
 }
