@@ -24,12 +24,6 @@ export function useProducts() {
     }
   }, []);
 
-  // Persist to localStorage on change
-  const persist = useCallback((updated: Product[]) => {
-    setProducts(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  }, []);
-
   const addProduct = useCallback((product: Product) => {
     setProducts((prev) => {
       const updated = [...prev, product];
