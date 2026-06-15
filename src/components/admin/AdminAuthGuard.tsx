@@ -62,6 +62,7 @@ export default function AdminAuthGuard({ children }: { children: React.ReactNode
                   value={pw}
                   onChange={(e) => { setPw(e.target.value); setErr(""); }}
                   placeholder="Enter admin password"
+                  autoComplete="current-password"
                   className="w-full rounded-[10px] border border-[var(--border)] bg-[var(--background)] py-3 pl-10 pr-12 text-[14px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] focus:ring-1 focus:ring-[rgba(59,130,246,0.2)] transition-colors"
                   autoFocus
                 />

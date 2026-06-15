@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -10,11 +9,9 @@ export default function Footer() {
           {/* Logo & Tagline */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center">
-              <Image
+              <img
                 src="/logo.png"
                 alt="TaxWise"
-                width={128}
-                height={32}
                 className="h-8 w-auto"
                 style={{ width: 'auto', height: '2rem' }}
               />

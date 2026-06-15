@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Shield } from "lucide-react";
@@ -34,16 +33,14 @@ export default function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center group">
-          <Image
+          <img
             src="/logo.png"
             alt="TaxWise"
-            width={128}
-            height={32}
             className="h-8 w-auto"
             style={{ width: 'auto', height: '2rem' }}
-            priority
           />
         </Link>
+
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
