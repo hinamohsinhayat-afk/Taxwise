@@ -39,9 +39,8 @@ export default function Navbar() {
             alt="TaxWise"
             width={128}
             height={32}
-            sizes="128px"
             className="h-8 w-auto"
-            style={{ width: 'auto', height: 'auto' }}
+            style={{ width: 'auto', height: '2rem' }}
             priority
           />
         </Link>
